@@ -1,11 +1,11 @@
 import './style.css';
-import Enter from './enter.png';
-import Refresh from './refresh.png';
-import Del from './del.png';
-import Edit from './edit.png';
-import Ok from './ok.png';
-import Exit from './exit.png';
-import Dots from './dots.png';
+import Enter from './images/enter.png';
+import Refresh from './images/refresh.png';
+import Del from './images/del.png';
+import Edit from './images/edit.png';
+import Ok from './images/ok.png';
+import Exit from './images/exit.png';
+import Dots from './images/dots.png';
 
 let toDoList = [];
 const refreshIcon = document.getElementById('refresh-icon');
