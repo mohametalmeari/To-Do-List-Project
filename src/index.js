@@ -4,13 +4,12 @@ import Enter from './enter.png';
 import Refresh from './refresh.png';
 
 const toDoList = [];
-
 const refreshIcon = document.getElementById('refresh-icon');
-refreshIcon.src = Refresh;
 const enterIcon = document.getElementById('enter-icon');
-enterIcon.src = Enter;
 const addField = document.getElementById('add-field');
 
+refreshIcon.src = Refresh;
+enterIcon.src = Enter;
 enterIcon.addEventListener('click', () => {
 if (toDoList.length !== 0) {
   toDoList.push(  {
