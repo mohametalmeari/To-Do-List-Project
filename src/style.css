@@ -87,7 +87,6 @@ input:checked ~ span {
   flex-grow: 1;
 }
 
-
 #clean-btn {
   height: 3rem;
   padding: 1rem;

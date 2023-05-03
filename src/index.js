@@ -7,70 +7,84 @@ import Ok from './ok.png';
 import Exit from './exit.png';
 import Dots from './dots.png';
 
-
 let toDoList = [];
 const refreshIcon = document.getElementById('refresh-icon');
 const enterIcon = document.getElementById('enter-icon');
 const addField = document.getElementById('add-field');
 const cleanBtn = document.getElementById('clean-btn');
 
-cleanBtn.addEventListener('click', () => {
-  toDoList = toDoList.filter(item => item.completed === false);
-  localStorage.setItem('to_do_list', JSON.stringify(toDoList));
-  ShowList();
-})
+const UpdateStorage = () => localStorage.setItem('to_do_list', JSON.stringify(toDoList));
+
+const ShowElement = (el = []) => {
+  for (let i = 0; i < el.length; i += 1) {
+    el[i].style.display = 'block';
+  }
+};
+
+const HideElement = (el = []) => {
+  for (let i = 0; i < el.length; i += 1) {
+    el[i].style.display = 'none';
+  }
+};
 
 if (localStorage.getItem('to_do_list') !== null) {
   toDoList = JSON.parse(localStorage.getItem('to_do_list'));
 }
 
-
 refreshIcon.src = Refresh;
 enterIcon.src = Enter;
-enterIcon.addEventListener('click', () => {
-if (toDoList.length !== 0) {
-  toDoList.push(  {
-    description: addField.value,
-    completed: false,
-    index: toDoList[toDoList.length-1].index + 1,
-  },)
-}else{
-  toDoList.push(  {
-    description: addField.value,
-    completed: false,
-    index: 0,
-  },)
-}
-ShowList();
-localStorage.setItem('to_do_list', JSON.stringify(toDoList));
-addField.value ="";
-addField.focus();
-})
 
 const listContainer = document.getElementById('list-container');
-const ShowList = () => {
+let ShowList;
+const UpdateIndex = (x) => {
+  for (let i = x; i < toDoList.length; i += 1) {
+    toDoList[i].index = i;
+  }
+  UpdateStorage();
+  ShowList();
+};
+
+const EditFun = (varX) => {
+  const editArrItem = toDoList.filter((item) => item.index === varX);
+  return editArrItem[0].description;
+};
+
+const DelFun = (varX) => {
+  toDoList = toDoList.filter((item) => item.index !== varX);
+};
+
+const OkFun = (varX, val) => {
+  toDoList = toDoList.filter((item) => {
+    if (item.index === varX) {
+      item.description = val;
+    }
+    return true;
+  });
+};
+
+const CheckFun = (varI, check) => {
+  toDoList[varI].completed = check;
+};
+ShowList = () => {
   listContainer.innerHTML = '';
   for (let i = 0; i < toDoList.length; i += 1) {
     const listItem = document.createElement('li');
     const checkIcon = document.createElement('input');
     const span = document.createElement('span');
     const editField = document.createElement('input');
-
     const delIcon = document.createElement('img');
     const editIcon = document.createElement('img');
     const okIcon = document.createElement('img');
     const xIcon = document.createElement('img');
     const dotsIcon = document.createElement('img');
 
-    listItem.id = `task${toDoList[i].index}`;
     const x = toDoList[i].index;
-    const taskValue = toDoList[i].description;
     checkIcon.type = 'checkbox';
     checkIcon.checked = toDoList[i].completed;
     span.innerHTML = toDoList[i].description;
     editField.style.flexGrow = 1;
 
-    delIcon.src =Del;
+    delIcon.src = Del;
     editIcon.src = Edit;
     okIcon.src = Ok;
     xIcon.src = Exit;
@@ -85,79 +99,71 @@ const ShowList = () => {
     listItem.appendChild(xIcon);
     listItem.appendChild(dotsIcon);
 
-    editField.style.display = 'none';
-    delIcon.style.display = 'none';
-    editIcon.style.display = 'none';
-    okIcon.style.display = 'none';
-    xIcon.style.display = 'none';
-    
+    HideElement([editField, delIcon, editIcon, okIcon, xIcon]);
+
     listContainer.appendChild(listItem);
 
-    checkIcon.addEventListener("change", function() {
-        toDoList[i].completed=this.checked;
-        localStorage.setItem('to_do_list', JSON.stringify(toDoList));
+    checkIcon.addEventListener('change', () => {
+      CheckFun(i, checkIcon.checked);
+      UpdateStorage();
     });
     dotsIcon.addEventListener('click', () => {
-      checkIcon.style.display = 'block';
-      span.style.display = 'block';
-      editField.style.display = 'none';
-      delIcon.style.display = 'block';
-      editIcon.style.display = 'block';
-      okIcon.style.display = 'none';
-      xIcon.style.display = 'block';
-      dotsIcon.style.display = 'none';
-    })
+      ShowElement([checkIcon, span, delIcon, editIcon, xIcon]);
+      HideElement([editField, okIcon, dotsIcon]);
+    });
 
     xIcon.addEventListener('click', () => {
-      checkIcon.style.display = 'block';
-      span.style.display = 'block';
-      editField.style.display = 'none';
-      delIcon.style.display = 'none';
-      editIcon.style.display = 'none';
-      okIcon.style.display = 'none';
-      xIcon.style.display = 'none';
-      dotsIcon.style.display = 'block';
-    })
+      ShowElement([checkIcon, span, dotsIcon]);
+      HideElement([editField, delIcon, editIcon, okIcon, xIcon]);
+    });
 
     editIcon.addEventListener('click', () => {
-      let editArrItem = toDoList.filter(item => item.index === x);
-      
-      editField.value =editArrItem[0].description;
-      checkIcon.style.display = 'none';
-      span.style.display = 'none';
-      editField.style.display = 'block';
-      delIcon.style.display = 'none';
-      editIcon.style.display = 'none';
-      okIcon.style.display = 'block';
-      xIcon.style.display = 'block';
-      dotsIcon.style.display = 'none';
-    })
+      editField.value = EditFun(x);
+      ShowElement([editField, okIcon, xIcon]);
+      HideElement([checkIcon, span, delIcon, editIcon, dotsIcon]);
+    });
 
     delIcon.addEventListener('click', () => {
       listItem.remove();
-      toDoList = toDoList.filter(item => item.index !== x);
-      localStorage.setItem('to_do_list', JSON.stringify(toDoList));
-    })
+      DelFun(x);
+      UpdateStorage();
+      UpdateIndex(x);
+    });
 
     okIcon.addEventListener('click', () => {
-      toDoList = toDoList.filter(item => {
-        if (item.index === x) {
-          item.description = editField.value;;
-        }
-        return true;
-      });
-      localStorage.setItem('to_do_list', JSON.stringify(toDoList));
-      span.innerHTML= editField.value;
-
-      checkIcon.style.display = 'block';
-      span.style.display = 'block';
-      editField.style.display = 'none';
-      delIcon.style.display = 'none';
-      editIcon.style.display = 'none';
-      okIcon.style.display = 'none';
-      xIcon.style.display = 'none';
-      dotsIcon.style.display = 'block';
-    })
+      OkFun(x, editField.value);
+      UpdateStorage();
+      span.innerHTML = editField.value;
+      ShowElement([checkIcon, span, dotsIcon]);
+      HideElement([editField, delIcon, editIcon, okIcon, xIcon]);
+    });
   }
 };
+
+enterIcon.addEventListener('click', () => {
+  if (toDoList.length !== 0) {
+    toDoList.push({
+      description: addField.value,
+      completed: false,
+      index: toDoList[toDoList.length - 1].index + 1,
+    });
+  } else {
+    toDoList.push({
+      description: addField.value,
+      completed: false,
+      index: 0,
+    });
+  }
+  ShowList();
+  UpdateStorage();
+  addField.value = '';
+  addField.focus();
+});
+
 ShowList();
+
+cleanBtn.addEventListener('click', () => {
+  toDoList = toDoList.filter((item) => item.completed === false);
+  UpdateStorage();
+  UpdateIndex(0);
+});
