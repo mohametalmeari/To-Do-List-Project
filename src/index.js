@@ -3,38 +3,31 @@ import Dots from './dots.png';
 import Enter from './enter.png';
 import Refresh from './refresh.png';
 
-const toDoList = [
-  {
-    description: 'Reset my PC',
-    completed: true,
-    index: 0,
-  },
-  {
-    description: 'Call my family',
-    completed: true,
-    index: 1,
-  },
-  {
-    description: 'Call my fasadasmily',
-    completed: true,
-    index: 2,
-  },
-  {
-    description: 'Call my family',
-    completed: false,
-    index: 3,
-  },
-  {
-    description: 'Call my family',
-    completed: true,
-    index: 4,
-  },
-];
+const toDoList = [];
 
 const refreshIcon = document.getElementById('refresh-icon');
 refreshIcon.src = Refresh;
 const enterIcon = document.getElementById('enter-icon');
 enterIcon.src = Enter;
+const addField = document.getElementById('add-field');
+
+enterIcon.addEventListener('click', () => {
+if (toDoList.length !== 0) {
+  toDoList.push(  {
+    description: addField.value,
+    completed: false,
+    index: toDoList[toDoList.length-1].index + 1,
+  },)
+}else{
+  toDoList.push(  {
+    description: addField.value,
+    completed: false,
+    index: 0,
+  },)
+}
+ShowList();
+localStorage.setItem('to_do_list', JSON.stringify(toDoList));
+})
 
 const listContainer = document.getElementById('list-container');
 const ShowList = () => {
