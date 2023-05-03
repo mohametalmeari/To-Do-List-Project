@@ -15,7 +15,7 @@
   \*************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/noSourceMaps.js */ \"./node_modules/css-loader/dist/runtime/noSourceMaps.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);\n// Imports\n\n\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, \"* {\\r\\n  box-sizing: border-box;\\r\\n  font-family: Arial, Helvetica, sans-serif;\\r\\n  font-size: medium;\\r\\n}\\r\\n\\r\\nbody {\\r\\n  margin: 0;\\r\\n  padding: 0;\\r\\n  display: flex;\\r\\n  height: 100vh;\\r\\n  justify-content: center;\\r\\n  align-items: center;\\r\\n  background-color: gainsboro;\\r\\n}\\r\\n\\r\\nh1 {\\r\\n  font-size: medium;\\r\\n  padding: 0;\\r\\n  margin: 0;\\r\\n  font-weight: normal;\\r\\n}\\r\\n\\r\\n.main-container {\\r\\n  padding: 0;\\r\\n  width: 50%;\\r\\n  align-items: stretch;\\r\\n  display: flex;\\r\\n  flex-direction: column;\\r\\n  box-shadow: 2px 2px 2px gray;\\r\\n}\\r\\n\\r\\n.main-container div {\\r\\n  margin: 0;\\r\\n  padding: 1rem;\\r\\n  display: flex;\\r\\n  align-items: center;\\r\\n  justify-content: space-between;\\r\\n  background-color: white;\\r\\n  border: solid 1px gainsboro;\\r\\n  height: 3rem;\\r\\n}\\r\\n\\r\\n#refresh-icon,\\r\\n#enter-icon {\\r\\n  width: 1rem;\\r\\n  aspect-ratio: 1/1;\\r\\n}\\r\\n\\r\\n#add-field {\\r\\n  height: 3rem;\\r\\n  border: solid 1px gainsboro;\\r\\n  border-right: 0;\\r\\n  border-left: 0;\\r\\n  outline: none;\\r\\n  flex-grow: 1;\\r\\n}\\r\\n\\r\\n#list-container {\\r\\n  margin: 0;\\r\\n  padding: 0;\\r\\n  list-style: none;\\r\\n  display: flex;\\r\\n  flex-direction: column;\\r\\n}\\r\\n\\r\\nli {\\r\\n  padding: 1rem;\\r\\n  border: solid 1px gainsboro;\\r\\n}\\r\\n\\r\\n#list-container li {\\r\\n  padding: 1rem;\\r\\n  display: flex;\\r\\n  justify-content: stretch;\\r\\n  align-items: center;\\r\\n  background-color: white;\\r\\n  height: 3rem;\\r\\n  gap: 1rem;\\r\\n}\\r\\n\\r\\ninput:checked ~ span {\\r\\n  text-decoration: line-through;\\r\\n  color: gray;\\r\\n}\\r\\n\\r\\n#list-container li span {\\r\\n  flex-grow: 1;\\r\\n}\\r\\n\\r\\n#clear-btn {\\r\\n  height: 3rem;\\r\\n  padding: 1rem;\\r\\n  margin: 0;\\r\\n  border: solid 1px gainsboro;\\r\\n  color: gray;\\r\\n}\\r\\n\\r\\n#clear-btn:hover {\\r\\n  background-color: gainsboro;\\r\\n}\\r\\n\\r\\n::-webkit-input-placeholder {\\r\\n  font-style: italic;\\r\\n}\\r\\n\\r\\n::-moz-placeholder {\\r\\n  font-style: italic;\\r\\n}\\r\\n\\r\\n:-moz-placeholder {\\r\\n  font-style: italic;\\r\\n}\\r\\n\\r\\n:-ms-input-placeholder {\\r\\n  font-style: italic;\\r\\n}\\r\\n\", \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://to-do-list-project/./src/style.css?./node_modules/css-loader/dist/cjs.js");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/noSourceMaps.js */ \"./node_modules/css-loader/dist/runtime/noSourceMaps.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);\n// Imports\n\n\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, \"* {\\r\\n  box-sizing: border-box;\\r\\n  font-family: Arial, Helvetica, sans-serif;\\r\\n  font-size: medium;\\r\\n}\\r\\n\\r\\nbody {\\r\\n  margin: 0;\\r\\n  padding: 0;\\r\\n  display: flex;\\r\\n  height: 100vh;\\r\\n  justify-content: center;\\r\\n  align-items: center;\\r\\n  background-color: gainsboro;\\r\\n}\\r\\n\\r\\nh1 {\\r\\n  font-size: medium;\\r\\n  padding: 0;\\r\\n  margin: 0;\\r\\n  font-weight: normal;\\r\\n}\\r\\n\\r\\n.main-container {\\r\\n  padding: 0;\\r\\n  width: 50%;\\r\\n  align-items: stretch;\\r\\n  max-height: 80%;\\r\\n  display: flex;\\r\\n  flex-direction: column;\\r\\n  box-shadow: 0 0 1rem gray;\\r\\n}\\r\\n\\r\\n.main-container div {\\r\\n  margin: 0;\\r\\n  padding: 1rem;\\r\\n  display: flex;\\r\\n  align-items: center;\\r\\n  justify-content: space-between;\\r\\n  background-color: white;\\r\\n  border: solid 1px gainsboro;\\r\\n  height: 3rem;\\r\\n}\\r\\n\\r\\nimg {\\r\\n  width: 1rem;\\r\\n  aspect-ratio: 1/1;\\r\\n}\\r\\n\\r\\n#add-field {\\r\\n  height: 3rem;\\r\\n  border: solid 1px gainsboro;\\r\\n  border-right: 0;\\r\\n  border-left: 0;\\r\\n  outline: none;\\r\\n  flex-grow: 1;\\r\\n}\\r\\n\\r\\n#list-container {\\r\\n  margin: 0;\\r\\n  padding: 0;\\r\\n  list-style: none;\\r\\n  display: flex;\\r\\n  flex-direction: column;\\r\\n  overflow: auto;\\r\\n}\\r\\n\\r\\nli {\\r\\n  padding: 1rem;\\r\\n  border: solid 1px gainsboro;\\r\\n}\\r\\n\\r\\n#list-container li {\\r\\n  padding: 1rem;\\r\\n  display: flex;\\r\\n  justify-content: stretch;\\r\\n  align-items: center;\\r\\n  background-color: white;\\r\\n  height: 3rem;\\r\\n  gap: 1rem;\\r\\n}\\r\\n\\r\\ninput:checked ~ span {\\r\\n  text-decoration: line-through;\\r\\n  color: gray;\\r\\n}\\r\\n\\r\\n#list-container li span {\\r\\n  flex-grow: 1;\\r\\n}\\r\\n\\r\\n#clean-btn {\\r\\n  height: 3rem;\\r\\n  padding: 1rem;\\r\\n  margin: 0;\\r\\n  border: solid 1px gainsboro;\\r\\n  color: gray;\\r\\n}\\r\\n\\r\\n#clean-btn:hover {\\r\\n  background-color: gainsboro;\\r\\n}\\r\\n\\r\\n::-webkit-input-placeholder {\\r\\n  font-style: italic;\\r\\n}\\r\\n\\r\\n::-webkit-scrollbar {\\r\\n  width: 5px;\\r\\n}\\r\\n\\r\\n::-webkit-scrollbar-track {\\r\\n  background-color: #f1f1f1;\\r\\n}\\r\\n\\r\\n::-webkit-scrollbar-thumb {\\r\\n  background-color: #888;\\r\\n}\\r\\n\\r\\n::-moz-placeholder {\\r\\n  font-style: italic;\\r\\n}\\r\\n\\r\\n:-moz-placeholder {\\r\\n  font-style: italic;\\r\\n}\\r\\n\\r\\n:-ms-input-placeholder {\\r\\n  font-style: italic;\\r\\n}\\r\\n\", \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://to-do-list-project/./src/style.css?./node_modules/css-loader/dist/cjs.js");
 
 /***/ }),
 
@@ -115,37 +115,87 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _dots_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dots.png */ \"./src/dots.png\");\n/* harmony import */ var _enter_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./enter.png */ \"./src/enter.png\");\n/* harmony import */ var _refresh_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./refresh.png */ \"./src/refresh.png\");\n\n\n\n\n\nconst toDoList = [\n  {\n    description: 'Reset my PC',\n    completed: true,\n    index: 0,\n  },\n  {\n    description: 'Call my family',\n    completed: true,\n    index: 1,\n  },\n  {\n    description: 'Call my fasadasmily',\n    completed: true,\n    index: 2,\n  },\n  {\n    description: 'Call my family',\n    completed: false,\n    index: 3,\n  },\n  {\n    description: 'Call my family',\n    completed: true,\n    index: 4,\n  },\n];\n\nconst refreshIcon = document.getElementById('refresh-icon');\nrefreshIcon.src = _refresh_png__WEBPACK_IMPORTED_MODULE_3__;\nconst enterIcon = document.getElementById('enter-icon');\nenterIcon.src = _enter_png__WEBPACK_IMPORTED_MODULE_2__;\nconst addField = document.getElementById('add-field')\nenterIcon.addEventListener('click', () => {\n alert(addField.value);\n})\n\nconst listContainer = document.getElementById('list-container');\nconst ShowList = () => {\n  listContainer.innerHTML = '';\n  for (let i = 0; i < toDoList.length; i += 1) {\n    const listItem = document.createElement('li');\n    const checkIcon = document.createElement('input');\n    const span = document.createElement('span');\n    const dotsIcon = document.createElement('img');\n\n    listItem.id = `task${toDoList[i].index}`;\n    checkIcon.type = 'checkbox';\n    checkIcon.checked = toDoList[i].completed;\n    span.innerHTML = toDoList[i].description;\n    dotsIcon.src = _dots_png__WEBPACK_IMPORTED_MODULE_1__;\n\n    listItem.appendChild(checkIcon);\n    listItem.appendChild(span);\n    listItem.appendChild(dotsIcon);\n    listContainer.appendChild(listItem);\n  }\n};\nShowList();\n\n//# sourceURL=webpack://to-do-list-project/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _images_enter_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./images/enter.png */ \"./src/images/enter.png\");\n/* harmony import */ var _images_refresh_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/refresh.png */ \"./src/images/refresh.png\");\n/* harmony import */ var _images_del_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./images/del.png */ \"./src/images/del.png\");\n/* harmony import */ var _images_edit_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./images/edit.png */ \"./src/images/edit.png\");\n/* harmony import */ var _images_ok_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./images/ok.png */ \"./src/images/ok.png\");\n/* harmony import */ var _images_exit_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./images/exit.png */ \"./src/images/exit.png\");\n/* harmony import */ var _images_dots_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./images/dots.png */ \"./src/images/dots.png\");\n/* harmony import */ var _javascript_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./javascript.js */ \"./src/javascript.js\");\n\n\n\n\n\n\n\n\n\n\nlet toDoList = [];\nconst refreshIcon = document.getElementById('refresh-icon');\nconst enterIcon = document.getElementById('enter-icon');\nconst addField = document.getElementById('add-field');\nconst cleanBtn = document.getElementById('clean-btn');\nconst listContainer = document.getElementById('list-container');\nlet ShowList;\nrefreshIcon.src = _images_refresh_png__WEBPACK_IMPORTED_MODULE_2__;\nenterIcon.src = _images_enter_png__WEBPACK_IMPORTED_MODULE_1__;\n\nif (localStorage.getItem('to_do_list') !== null) {\n  toDoList = JSON.parse(localStorage.getItem('to_do_list'));\n}\n\nconst UpdateStorage = () => localStorage.setItem('to_do_list', JSON.stringify(toDoList));\n\nconst UpdateIndex = (x) => {\n  for (let i = x; i < toDoList.length; i += 1) {\n    toDoList[i].index = i;\n  }\n  UpdateStorage();\n  ShowList();\n};\n\nconst EditFun = (varX) => {\n  const editArrItem = toDoList.filter((item) => item.index === varX);\n  return editArrItem[0].description;\n};\n\nconst DelFun = (varX) => {\n  toDoList = toDoList.filter((item) => item.index !== varX);\n};\n\nconst OkFun = (varX, val) => {\n  toDoList = toDoList.filter((item) => {\n    if (item.index === varX) {\n      item.description = val;\n    }\n    return true;\n  });\n};\n\nconst CheckFun = (varI, check) => {\n  toDoList[varI].completed = check;\n};\n\nShowList = () => {\n  listContainer.innerHTML = '';\n  for (let i = 0; i < toDoList.length; i += 1) {\n    const listItem = document.createElement('li');\n    const checkIcon = document.createElement('input');\n    const span = document.createElement('span');\n    const editField = document.createElement('input');\n    const delIcon = document.createElement('img');\n    const editIcon = document.createElement('img');\n    const okIcon = document.createElement('img');\n    const xIcon = document.createElement('img');\n    const dotsIcon = document.createElement('img');\n\n    const x = toDoList[i].index;\n    checkIcon.type = 'checkbox';\n    checkIcon.checked = toDoList[i].completed;\n    span.innerHTML = toDoList[i].description;\n    editField.style.flexGrow = 1;\n\n    delIcon.src = _images_del_png__WEBPACK_IMPORTED_MODULE_3__;\n    editIcon.src = _images_edit_png__WEBPACK_IMPORTED_MODULE_4__;\n    okIcon.src = _images_ok_png__WEBPACK_IMPORTED_MODULE_5__;\n    xIcon.src = _images_exit_png__WEBPACK_IMPORTED_MODULE_6__;\n    dotsIcon.src = _images_dots_png__WEBPACK_IMPORTED_MODULE_7__;\n\n    listItem.appendChild(checkIcon);\n    listItem.appendChild(span);\n    listItem.appendChild(editField);\n    listItem.appendChild(delIcon);\n    listItem.appendChild(editIcon);\n    listItem.appendChild(okIcon);\n    listItem.appendChild(xIcon);\n    listItem.appendChild(dotsIcon);\n\n    (0,_javascript_js__WEBPACK_IMPORTED_MODULE_8__.HideElement)([editField, delIcon, editIcon, okIcon, xIcon]);\n\n    listContainer.appendChild(listItem);\n\n    checkIcon.addEventListener('change', () => {\n      CheckFun(i, checkIcon.checked);\n      UpdateStorage();\n    });\n    dotsIcon.addEventListener('click', () => {\n      (0,_javascript_js__WEBPACK_IMPORTED_MODULE_8__.ShowElement)([checkIcon, span, delIcon, editIcon, xIcon]);\n      (0,_javascript_js__WEBPACK_IMPORTED_MODULE_8__.HideElement)([editField, okIcon, dotsIcon]);\n    });\n\n    xIcon.addEventListener('click', () => {\n      (0,_javascript_js__WEBPACK_IMPORTED_MODULE_8__.ShowElement)([checkIcon, span, dotsIcon]);\n      (0,_javascript_js__WEBPACK_IMPORTED_MODULE_8__.HideElement)([editField, delIcon, editIcon, okIcon, xIcon]);\n    });\n\n    editIcon.addEventListener('click', () => {\n      editField.value = EditFun(x);\n      (0,_javascript_js__WEBPACK_IMPORTED_MODULE_8__.ShowElement)([editField, okIcon, xIcon]);\n      (0,_javascript_js__WEBPACK_IMPORTED_MODULE_8__.HideElement)([checkIcon, span, delIcon, editIcon, dotsIcon]);\n    });\n\n    delIcon.addEventListener('click', () => {\n      listItem.remove();\n      DelFun(x);\n      UpdateStorage();\n      UpdateIndex(x);\n    });\n\n    okIcon.addEventListener('click', () => {\n      OkFun(x, editField.value);\n      UpdateStorage();\n      span.innerHTML = editField.value;\n      (0,_javascript_js__WEBPACK_IMPORTED_MODULE_8__.ShowElement)([checkIcon, span, dotsIcon]);\n      (0,_javascript_js__WEBPACK_IMPORTED_MODULE_8__.HideElement)([editField, delIcon, editIcon, okIcon, xIcon]);\n    });\n  }\n};\n\nShowList();\n\nenterIcon.addEventListener('click', () => {\n  if (toDoList.length !== 0) {\n    toDoList.push({\n      description: addField.value,\n      completed: false,\n      index: toDoList[toDoList.length - 1].index + 1,\n    });\n  } else {\n    toDoList.push({\n      description: addField.value,\n      completed: false,\n      index: 0,\n    });\n  }\n  ShowList();\n  UpdateStorage();\n  addField.value = '';\n  addField.focus();\n});\n\naddField.addEventListener('keydown', (event) => {\n  if (event.key === 'Enter') {\n    event.preventDefault();\n    enterIcon.click();\n  }\n});\n\ncleanBtn.addEventListener('click', () => {\n  toDoList = toDoList.filter((item) => item.completed === false);\n  UpdateStorage();\n  UpdateIndex(0);\n});\n\n//# sourceURL=webpack://to-do-list-project/./src/index.js?");
 
 /***/ }),
 
-/***/ "./src/dots.png":
-/*!**********************!*\
-  !*** ./src/dots.png ***!
-  \**********************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./src/javascript.js":
+/*!***************************!*\
+  !*** ./src/javascript.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"3a9493a080887ddaef77.png\";\n\n//# sourceURL=webpack://to-do-list-project/./src/dots.png?");
-
-/***/ }),
-
-/***/ "./src/enter.png":
-/*!***********************!*\
-  !*** ./src/enter.png ***!
-  \***********************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-eval("module.exports = __webpack_require__.p + \"a6be7477364f2b104fba.png\";\n\n//# sourceURL=webpack://to-do-list-project/./src/enter.png?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"HideElement\": () => (/* binding */ HideElement),\n/* harmony export */   \"ShowElement\": () => (/* binding */ ShowElement)\n/* harmony export */ });\nconst ShowElement = (el = []) => {\n  for (let i = 0; i < el.length; i += 1) {\n    el[i].style.display = 'block';\n  }\n};\n\nconst HideElement = (el = []) => {\n  for (let i = 0; i < el.length; i += 1) {\n    el[i].style.display = 'none';\n  }\n};\n\n\n\n//# sourceURL=webpack://to-do-list-project/./src/javascript.js?");
 
 /***/ }),
 
-/***/ "./src/refresh.png":
-/*!*************************!*\
-  !*** ./src/refresh.png ***!
-  \*************************/
+/***/ "./src/images/del.png":
+/*!****************************!*\
+  !*** ./src/images/del.png ***!
+  \****************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"f441a0886e3869491398.png\";\n\n//# sourceURL=webpack://to-do-list-project/./src/refresh.png?");
+eval("module.exports = __webpack_require__.p + \"ee4b58337bd3477db466.png\";\n\n//# sourceURL=webpack://to-do-list-project/./src/images/del.png?");
+
+/***/ }),
+
+/***/ "./src/images/dots.png":
+/*!*****************************!*\
+  !*** ./src/images/dots.png ***!
+  \*****************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"3a9493a080887ddaef77.png\";\n\n//# sourceURL=webpack://to-do-list-project/./src/images/dots.png?");
+
+/***/ }),
+
+/***/ "./src/images/edit.png":
+/*!*****************************!*\
+  !*** ./src/images/edit.png ***!
+  \*****************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"6f6481dd783e4c5d194e.png\";\n\n//# sourceURL=webpack://to-do-list-project/./src/images/edit.png?");
+
+/***/ }),
+
+/***/ "./src/images/enter.png":
+/*!******************************!*\
+  !*** ./src/images/enter.png ***!
+  \******************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"a6be7477364f2b104fba.png\";\n\n//# sourceURL=webpack://to-do-list-project/./src/images/enter.png?");
+
+/***/ }),
+
+/***/ "./src/images/exit.png":
+/*!*****************************!*\
+  !*** ./src/images/exit.png ***!
+  \*****************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"cfbc2abb610e7e0ca089.png\";\n\n//# sourceURL=webpack://to-do-list-project/./src/images/exit.png?");
+
+/***/ }),
+
+/***/ "./src/images/ok.png":
+/*!***************************!*\
+  !*** ./src/images/ok.png ***!
+  \***************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"852ad271cd73ed3f901c.png\";\n\n//# sourceURL=webpack://to-do-list-project/./src/images/ok.png?");
+
+/***/ }),
+
+/***/ "./src/images/refresh.png":
+/*!********************************!*\
+  !*** ./src/images/refresh.png ***!
+  \********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"f441a0886e3869491398.png\";\n\n//# sourceURL=webpack://to-do-list-project/./src/images/refresh.png?");
 
 /***/ })
 
