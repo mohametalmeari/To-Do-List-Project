@@ -6,36 +6,24 @@ import Edit from './images/edit.png';
 import Ok from './images/ok.png';
 import Exit from './images/exit.png';
 import Dots from './images/dots.png';
+import { ShowElement, HideElement } from './javascript.js';
 
 let toDoList = [];
 const refreshIcon = document.getElementById('refresh-icon');
 const enterIcon = document.getElementById('enter-icon');
 const addField = document.getElementById('add-field');
 const cleanBtn = document.getElementById('clean-btn');
-
-const UpdateStorage = () => localStorage.setItem('to_do_list', JSON.stringify(toDoList));
-
-const ShowElement = (el = []) => {
-  for (let i = 0; i < el.length; i += 1) {
-    el[i].style.display = 'block';
-  }
-};
-
-const HideElement = (el = []) => {
-  for (let i = 0; i < el.length; i += 1) {
-    el[i].style.display = 'none';
-  }
-};
+const listContainer = document.getElementById('list-container');
+let ShowList;
+refreshIcon.src = Refresh;
+enterIcon.src = Enter;
 
 if (localStorage.getItem('to_do_list') !== null) {
   toDoList = JSON.parse(localStorage.getItem('to_do_list'));
 }
 
-refreshIcon.src = Refresh;
-enterIcon.src = Enter;
+const UpdateStorage = () => localStorage.setItem('to_do_list', JSON.stringify(toDoList));
 
-const listContainer = document.getElementById('list-container');
-let ShowList;
 const UpdateIndex = (x) => {
   for (let i = x; i < toDoList.length; i += 1) {
     toDoList[i].index = i;
@@ -65,6 +53,7 @@ const OkFun = (varX, val) => {
 const CheckFun = (varI, check) => {
   toDoList[varI].completed = check;
 };
+
 ShowList = () => {
   listContainer.innerHTML = '';
   for (let i = 0; i < toDoList.length; i += 1) {
@@ -140,6 +129,8 @@ ShowList = () => {
   }
 };
 
+ShowList();
+
 enterIcon.addEventListener('click', () => {
   if (toDoList.length !== 0) {
     toDoList.push({
@@ -160,7 +151,12 @@ enterIcon.addEventListener('click', () => {
   addField.focus();
 });
 
-ShowList();
+addField.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    enterIcon.click();
+  }
+});
 
 cleanBtn.addEventListener('click', () => {
   toDoList = toDoList.filter((item) => item.completed === false);
