@@ -71,7 +71,7 @@
 
 > Open the link bellow:
 
- - [Live Demo Link](https://mohametalmeari.github.io/To-Do-List-Project/)
+ - [Live Demo Link](https://mohametalmeari.github.io/To-Do-List-Project/dist/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
