@@ -27,7 +27,7 @@ h1 {
   align-items: stretch;
   display: flex;
   flex-direction: column;
-  box-shadow: 2px 2px 2px gray;
+  box-shadow: 0 0 1rem gray;
 }
 
 .main-container div {
@@ -41,8 +41,7 @@ h1 {
   height: 3rem;
 }
 
-#refresh-icon,
-#enter-icon {
+img {
   width: 1rem;
   aspect-ratio: 1/1;
 }
@@ -88,7 +87,8 @@ input:checked ~ span {
   flex-grow: 1;
 }
 
-#clear-btn {
+
+#clean-btn {
   height: 3rem;
   padding: 1rem;
   margin: 0;
@@ -96,7 +96,7 @@ input:checked ~ span {
   color: gray;
 }
 
-#clear-btn:hover {
+#clean-btn:hover {
   background-color: gainsboro;
 }
 
