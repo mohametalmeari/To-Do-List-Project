@@ -6,7 +6,8 @@ import Edit from './images/edit.png';
 import Ok from './images/ok.png';
 import Exit from './images/exit.png';
 import Dots from './images/dots.png';
-import { ShowElement, HideElement } from './javascript.js';
+import { ShowElement, HideElement } from './modules/visibility.js';
+import CheckIfCompleted from './modules/complete.js';
 
 let toDoList = [];
 const refreshIcon = document.getElementById('refresh-icon');
@@ -51,7 +52,7 @@ const OkFun = (varX, val) => {
 };
 
 const CheckFun = (varI, check) => {
-  toDoList[varI].completed = check;
+  toDoList[varI].completed = CheckIfCompleted(check);
 };
 
 ShowList = () => {
