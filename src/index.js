@@ -15,8 +15,8 @@ const enterIcon = document.getElementById('enter-icon');
 const addField = document.getElementById('add-field');
 const cleanBtn = document.getElementById('clean-btn');
 const listContainer = document.getElementById('list-container');
-let ShowList;
 refreshIcon.src = Refresh;
+
 enterIcon.src = Enter;
 
 if (localStorage.getItem('to_do_list') !== null) {
@@ -30,7 +30,6 @@ const UpdateIndex = (x) => {
     toDoList[i].index = i;
   }
   UpdateStorage();
-  ShowList();
 };
 
 const EditFun = (varX) => {
@@ -55,7 +54,7 @@ const CheckFun = (varI, check) => {
   toDoList[varI].completed = CheckIfCompleted(check);
 };
 
-ShowList = () => {
+const ShowList = () => {
   listContainer.innerHTML = '';
   for (let i = 0; i < toDoList.length; i += 1) {
     const listItem = document.createElement('li');
@@ -68,6 +67,7 @@ ShowList = () => {
     const xIcon = document.createElement('img');
     const dotsIcon = document.createElement('img');
 
+    listItem.classList.add('item');
     const x = toDoList[i].index;
     checkIcon.type = 'checkbox';
     checkIcon.checked = toDoList[i].completed;
@@ -118,6 +118,7 @@ ShowList = () => {
       DelFun(x);
       UpdateStorage();
       UpdateIndex(x);
+      ShowList();
     });
 
     okIcon.addEventListener('click', () => {
@@ -163,4 +164,45 @@ cleanBtn.addEventListener('click', () => {
   toDoList = toDoList.filter((item) => item.completed === false);
   UpdateStorage();
   UpdateIndex(0);
+  ShowList();
 });
+
+const dragFun = () => {
+  let dragFromIndex;
+  let dragToIndex;
+  let items = listContainer.querySelectorAll('.item');
+  items.forEach((item) => {
+    item.draggable = true;
+    item.addEventListener('dragstart', (e) => {
+      setTimeout(() => item.classList.add('dragging'), 0);
+      dragFromIndex = Array.from(items).indexOf(e.target);
+    });
+    item.addEventListener('dragend', (e) => {
+      item.classList.remove('dragging');
+
+      const newParent = e.target.parentNode;
+      const newItems = newParent.childNodes;
+      dragToIndex = Array.from(newItems).indexOf(e.target);
+      items = listContainer.querySelectorAll('.item');
+
+      const objToMove = toDoList[dragFromIndex];
+      objToMove.index = dragToIndex;
+      toDoList.splice(dragFromIndex, 1);
+      toDoList.splice(dragToIndex, 0, objToMove);
+      UpdateIndex(0);
+      window.location.reload(); // I should find a better solution than reloading the page
+    });
+  });
+
+  const initlistContainer = (e) => {
+    e.preventDefault();
+    const draggingItem = document.querySelector('.dragging');
+    const siblings = [...listContainer.querySelectorAll('.item:not(.dragging)')];
+    const nextSib = siblings.find((sib) => e.clientY <= sib.offsetTop + sib.offsetHeight / 2);
+    listContainer.insertBefore(draggingItem, nextSib);
+  };
+
+  listContainer.addEventListener('dragover', initlistContainer);
+  listContainer.addEventListener('dragenter', (e) => e.preventDefault());
+};
+dragFun();
