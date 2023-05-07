@@ -19,7 +19,7 @@ refreshIcon.src = Refresh;
 
 enterIcon.src = Enter;
 
-if (localStorage.getItem('to_do_list') !== null) {
+if (typeof localStorage.getItem('to_do_list') !== "undefined" && localStorage.getItem('to_do_list') !== null) {
   toDoList = JSON.parse(localStorage.getItem('to_do_list'));
 }
 
@@ -50,9 +50,56 @@ const OkFun = (varX, val) => {
   });
 };
 
-const CheckFun = (varI, check) => {
-  toDoList[varI].completed = CheckIfCompleted(check);
-};
+
+const ListenToBtns = () => {
+  const listItem = document.querySelectorAll('.item');
+const checkIcon = document.querySelectorAll('.check-icon');
+const span = document.querySelectorAll('.task-text');
+const editField = document.querySelectorAll('.edit-field');
+const delIcon = document.querySelectorAll('.del-icon');
+const editIcon = document.querySelectorAll('.edit-icon');
+const okIcon = document.querySelectorAll('.ok-icon');
+const xIcon = document.querySelectorAll('.x-icon');
+const dotsIcon = document.querySelectorAll('.dots-icon');
+
+for (let i = 0; i < toDoList.length; i += 1) {
+  const index = toDoList[i].index;
+    checkIcon[i].addEventListener('change', () => {
+      toDoList[i].completed = CheckIfCompleted(checkIcon[i].checked);
+      UpdateStorage();
+    });
+    dotsIcon[i].addEventListener('click', () => {
+      ShowElement([checkIcon[i], span[i], delIcon[i], editIcon[i], xIcon[i]]);
+      HideElement([editField[i], okIcon[i], dotsIcon[i]]);
+    });
+    xIcon[i].addEventListener('click', () => {
+      ShowElement([checkIcon[i], span[i], dotsIcon[i]]);
+      HideElement([editField[i], delIcon[i], editIcon[i], okIcon[i], xIcon[i]]);
+    });
+    editIcon[i].addEventListener('click', () => {
+      editField[i].value = EditFun(index);
+      ShowElement([editField[i], okIcon[i], xIcon[i]]);
+      HideElement([checkIcon[i], span[i], delIcon[i], editIcon[i], dotsIcon[i]]);
+    });
+    delIcon[i].addEventListener('click', () => {
+      listItem[i].remove();
+      DelFun(index);
+      UpdateStorage();
+      UpdateIndex(index);
+      ShowList();
+    });
+    okIcon[i].addEventListener('click', () => {
+      OkFun(index, editField[i].value);
+      UpdateStorage();
+      span[i].innerHTML = editField[i].value;
+      ShowElement([checkIcon[i], span[i], dotsIcon[i]]);
+      HideElement([editField[i], delIcon[i], editIcon[i], okIcon[i], xIcon[i]]);
+    });
+}
+}
+
+
+
 
 const ShowList = () => {
   listContainer.innerHTML = '';
@@ -68,7 +115,14 @@ const ShowList = () => {
     const dotsIcon = document.createElement('img');
 
     listItem.classList.add('item');
-    const x = toDoList[i].index;
+    checkIcon.classList.add('check-icon');
+    span.classList.add('task-text');
+    editField.classList.add('edit-field');
+    delIcon.classList.add('del-icon');
+    editIcon.classList.add('edit-icon');
+    okIcon.classList.add('ok-icon');
+    xIcon.classList.add('x-icon');
+    dotsIcon.classList.add('dots-icon');
     checkIcon.type = 'checkbox';
     checkIcon.checked = toDoList[i].completed;
     span.innerHTML = toDoList[i].description;
@@ -90,45 +144,9 @@ const ShowList = () => {
     listItem.appendChild(dotsIcon);
 
     HideElement([editField, delIcon, editIcon, okIcon, xIcon]);
-
     listContainer.appendChild(listItem);
-
-    checkIcon.addEventListener('change', () => {
-      CheckFun(i, checkIcon.checked);
-      UpdateStorage();
-    });
-    dotsIcon.addEventListener('click', () => {
-      ShowElement([checkIcon, span, delIcon, editIcon, xIcon]);
-      HideElement([editField, okIcon, dotsIcon]);
-    });
-
-    xIcon.addEventListener('click', () => {
-      ShowElement([checkIcon, span, dotsIcon]);
-      HideElement([editField, delIcon, editIcon, okIcon, xIcon]);
-    });
-
-    editIcon.addEventListener('click', () => {
-      editField.value = EditFun(x);
-      ShowElement([editField, okIcon, xIcon]);
-      HideElement([checkIcon, span, delIcon, editIcon, dotsIcon]);
-    });
-
-    delIcon.addEventListener('click', () => {
-      listItem.remove();
-      DelFun(x);
-      UpdateStorage();
-      UpdateIndex(x);
-      ShowList();
-    });
-
-    okIcon.addEventListener('click', () => {
-      OkFun(x, editField.value);
-      UpdateStorage();
-      span.innerHTML = editField.value;
-      ShowElement([checkIcon, span, dotsIcon]);
-      HideElement([editField, delIcon, editIcon, okIcon, xIcon]);
-    });
   }
+  ListenToBtns();
 };
 
 ShowList();
