@@ -15,6 +15,8 @@ const enterIcon = document.getElementById('enter-icon');
 const addField = document.getElementById('add-field');
 const clearBtn = document.getElementById('clear-btn');
 let listContainer = document.getElementById('list-container');
+let dragFun = () => {};
+
 refreshIcon.src = Refresh;
 
 enterIcon.src = Enter;
@@ -49,6 +51,7 @@ const ListenToBtns = () => {
 
   const checkFun = (i) => {
     toDoList[i].completed = CheckIfCompleted(checkIcon[i].checked);
+    UpdateStorage();
   };
   const EditFun = (i) => {
     editField[i].value = toDoList[i].description;
@@ -57,6 +60,9 @@ const ListenToBtns = () => {
   const DelFun = (i) => {
     toDoList = toDoList.filter((item) => item.index !== i);
     listItem[i].remove();
+    UpdateIndex(0);
+    ListenToBtns();
+    dragFun();
   };
   const OkFun = (i) => {
     toDoList.forEach((item) => {
@@ -65,13 +71,12 @@ const ListenToBtns = () => {
       }
     });
     span[i].innerHTML = editField[i].value;
+    UpdateStorage();
   };
-  
 
   for (let i = 0; i < toDoList.length; i += 1) {
     checkIcon[i].addEventListener('change', () => {
       checkFun(i);
-      UpdateStorage();
     });
     dotsIcon[i].addEventListener('click', () => {
       ShowElement([checkIcon[i], span[i], delIcon[i], editIcon[i], xIcon[i]]);
@@ -88,12 +93,9 @@ const ListenToBtns = () => {
     });
     delIcon[i].addEventListener('click', () => {
       DelFun(i);
-      UpdateIndex(0);
-      ListenToBtns();
     });
     okIcon[i].addEventListener('click', () => {
       OkFun(i);
-      UpdateStorage();
       ShowElement([checkIcon[i], span[i], dotsIcon[i]]);
       HideElement([editField[i], delIcon[i], editIcon[i], okIcon[i], xIcon[i]]);
     });
@@ -102,11 +104,10 @@ const ListenToBtns = () => {
       if (event.key === 'Enter') {
         event.preventDefault();
         okIcon[i].click();
-      }else if (event.key === 'Escape') {
-        // Hide the edit field
+      } else if (event.key === 'Escape') {
         xIcon[i].click();
       }
-    });
+    });s
   }
 };
 
@@ -190,7 +191,7 @@ clearBtn.addEventListener('click', () => {
   dragFun();
 });
 
-const dragFun = () => {
+dragFun = () => {
   let fromIndex;
   let toIndex;
   let items = listContainer.querySelectorAll('.item');
