@@ -14,7 +14,7 @@ const refreshIcon = document.getElementById('refresh-icon');
 const enterIcon = document.getElementById('enter-icon');
 const addField = document.getElementById('add-field');
 const clearBtn = document.getElementById('clear-btn');
-const listContainer = document.getElementById('list-container');
+let listContainer = document.getElementById('list-container');
 refreshIcon.src = Refresh;
 
 enterIcon.src = Enter;
@@ -33,6 +33,11 @@ const UpdateIndex = (x) => {
 };
 
 const ListenToBtns = () => {
+  const renewList = listContainer.cloneNode(true);
+  listContainer.replaceWith(renewList);
+  listContainer = document.getElementById('list-container');
+
+  const listItem = document.querySelectorAll('.item');
   const checkIcon = document.querySelectorAll('.check-icon');
   const span = document.querySelectorAll('.task-text');
   const editField = document.querySelectorAll('.edit-field');
@@ -51,6 +56,7 @@ const ListenToBtns = () => {
   };
   const DelFun = (i) => {
     toDoList = toDoList.filter((item) => item.index !== i);
+    listItem[i].remove();
   };
   const OkFun = (i) => {
     toDoList.forEach((item) => {
@@ -81,9 +87,8 @@ const ListenToBtns = () => {
     });
     delIcon[i].addEventListener('click', () => {
       DelFun(i);
-      UpdateStorage();
       UpdateIndex(0);
-      ShowList();
+      ListenToBtns();
     });
     okIcon[i].addEventListener('click', () => {
       OkFun(i);
