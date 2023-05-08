@@ -13,13 +13,15 @@ let toDoList = [];
 const refreshIcon = document.getElementById('refresh-icon');
 const enterIcon = document.getElementById('enter-icon');
 const addField = document.getElementById('add-field');
-const cleanBtn = document.getElementById('clean-btn');
-const listContainer = document.getElementById('list-container');
+const clearBtn = document.getElementById('clear-btn');
+let listContainer = document.getElementById('list-container');
+let dragFun = () => {};
+
 refreshIcon.src = Refresh;
 
 enterIcon.src = Enter;
 
-if (localStorage.getItem('to_do_list') !== null) {
+if (typeof localStorage.getItem('to_do_list') !== 'undefined' && localStorage.getItem('to_do_list') !== null) {
   toDoList = JSON.parse(localStorage.getItem('to_do_list'));
 }
 
@@ -32,26 +34,81 @@ const UpdateIndex = (x) => {
   UpdateStorage();
 };
 
-const EditFun = (varX) => {
-  const editArrItem = toDoList.filter((item) => item.index === varX);
-  return editArrItem[0].description;
-};
+const ListenToBtns = () => {
+  const renewList = listContainer.cloneNode(true);
+  listContainer.replaceWith(renewList);
+  listContainer = document.getElementById('list-container');
 
-const DelFun = (varX) => {
-  toDoList = toDoList.filter((item) => item.index !== varX);
-};
+  const listItem = document.querySelectorAll('.item');
+  const checkIcon = document.querySelectorAll('.check-icon');
+  const span = document.querySelectorAll('.task-text');
+  const editField = document.querySelectorAll('.edit-field');
+  const delIcon = document.querySelectorAll('.del-icon');
+  const editIcon = document.querySelectorAll('.edit-icon');
+  const okIcon = document.querySelectorAll('.ok-icon');
+  const xIcon = document.querySelectorAll('.x-icon');
+  const dotsIcon = document.querySelectorAll('.dots-icon');
 
-const OkFun = (varX, val) => {
-  toDoList = toDoList.filter((item) => {
-    if (item.index === varX) {
-      item.description = val;
-    }
-    return true;
-  });
-};
+  const checkFun = (i) => {
+    toDoList[i].completed = CheckIfCompleted(checkIcon[i].checked);
+    UpdateStorage();
+  };
+  const EditFun = (i) => {
+    editField[i].value = toDoList[i].description;
+    editField[i].focus();
+  };
+  const DelFun = (i) => {
+    toDoList = toDoList.filter((item) => item.index !== i);
+    listItem[i].remove();
+    UpdateIndex(0);
+    ListenToBtns();
+    dragFun();
+  };
+  const OkFun = (i) => {
+    toDoList.forEach((item) => {
+      if (item.index === i) {
+        item.description = editField[i].value;
+      }
+    });
+    span[i].innerHTML = editField[i].value;
+    UpdateStorage();
+  };
 
-const CheckFun = (varI, check) => {
-  toDoList[varI].completed = CheckIfCompleted(check);
+  for (let i = 0; i < toDoList.length; i += 1) {
+    checkIcon[i].addEventListener('change', () => {
+      checkFun(i);
+    });
+    dotsIcon[i].addEventListener('click', () => {
+      ShowElement([checkIcon[i], span[i], delIcon[i], editIcon[i], xIcon[i]]);
+      HideElement([editField[i], okIcon[i], dotsIcon[i]]);
+    });
+    xIcon[i].addEventListener('click', () => {
+      ShowElement([checkIcon[i], span[i], dotsIcon[i]]);
+      HideElement([editField[i], delIcon[i], editIcon[i], okIcon[i], xIcon[i]]);
+    });
+    editIcon[i].addEventListener('click', () => {
+      ShowElement([editField[i], okIcon[i], xIcon[i]]);
+      HideElement([checkIcon[i], span[i], delIcon[i], editIcon[i], dotsIcon[i]]);
+      EditFun(i);
+    });
+    delIcon[i].addEventListener('click', () => {
+      DelFun(i);
+    });
+    okIcon[i].addEventListener('click', () => {
+      OkFun(i);
+      ShowElement([checkIcon[i], span[i], dotsIcon[i]]);
+      HideElement([editField[i], delIcon[i], editIcon[i], okIcon[i], xIcon[i]]);
+    });
+
+    editField[i].addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        okIcon[i].click();
+      } else if (event.key === 'Escape') {
+        xIcon[i].click();
+      }
+    });
+  }
 };
 
 const ShowList = () => {
@@ -60,6 +117,7 @@ const ShowList = () => {
     const listItem = document.createElement('li');
     const checkIcon = document.createElement('input');
     const span = document.createElement('span');
+
     const editField = document.createElement('input');
     const delIcon = document.createElement('img');
     const editIcon = document.createElement('img');
@@ -68,7 +126,14 @@ const ShowList = () => {
     const dotsIcon = document.createElement('img');
 
     listItem.classList.add('item');
-    const x = toDoList[i].index;
+    checkIcon.classList.add('check-icon');
+    span.classList.add('task-text');
+    editField.classList.add('edit-field');
+    delIcon.classList.add('del-icon');
+    editIcon.classList.add('edit-icon');
+    okIcon.classList.add('ok-icon');
+    xIcon.classList.add('x-icon');
+    dotsIcon.classList.add('dots-icon');
     checkIcon.type = 'checkbox';
     checkIcon.checked = toDoList[i].completed;
     span.innerHTML = toDoList[i].description;
@@ -92,65 +157,24 @@ const ShowList = () => {
     HideElement([editField, delIcon, editIcon, okIcon, xIcon]);
 
     listContainer.appendChild(listItem);
-
-    checkIcon.addEventListener('change', () => {
-      CheckFun(i, checkIcon.checked);
-      UpdateStorage();
-    });
-    dotsIcon.addEventListener('click', () => {
-      ShowElement([checkIcon, span, delIcon, editIcon, xIcon]);
-      HideElement([editField, okIcon, dotsIcon]);
-    });
-
-    xIcon.addEventListener('click', () => {
-      ShowElement([checkIcon, span, dotsIcon]);
-      HideElement([editField, delIcon, editIcon, okIcon, xIcon]);
-    });
-
-    editIcon.addEventListener('click', () => {
-      editField.value = EditFun(x);
-      ShowElement([editField, okIcon, xIcon]);
-      HideElement([checkIcon, span, delIcon, editIcon, dotsIcon]);
-    });
-
-    delIcon.addEventListener('click', () => {
-      listItem.remove();
-      DelFun(x);
-      UpdateStorage();
-      UpdateIndex(x);
-      ShowList();
-    });
-
-    okIcon.addEventListener('click', () => {
-      OkFun(x, editField.value);
-      UpdateStorage();
-      span.innerHTML = editField.value;
-      ShowElement([checkIcon, span, dotsIcon]);
-      HideElement([editField, delIcon, editIcon, okIcon, xIcon]);
-    });
   }
+  ListenToBtns();
 };
 
 ShowList();
 
 enterIcon.addEventListener('click', () => {
-  if (toDoList.length !== 0) {
-    toDoList.push({
-      description: addField.value,
-      completed: false,
-      index: toDoList[toDoList.length - 1].index + 1,
-    });
-  } else {
-    toDoList.push({
-      description: addField.value,
-      completed: false,
-      index: 0,
-    });
-  }
+  const index = (toDoList.length !== 0) ? toDoList[toDoList.length - 1].index + 1 : 0;
+  toDoList.push({
+    description: addField.value,
+    completed: false,
+    index,
+  });
   ShowList();
   UpdateStorage();
   addField.value = '';
   addField.focus();
+  dragFun();
 });
 
 addField.addEventListener('keydown', (event) => {
@@ -160,37 +184,34 @@ addField.addEventListener('keydown', (event) => {
   }
 });
 
-cleanBtn.addEventListener('click', () => {
+clearBtn.addEventListener('click', () => {
   toDoList = toDoList.filter((item) => item.completed === false);
   UpdateStorage();
-  UpdateIndex(0);
   ShowList();
+  dragFun();
 });
 
-const dragFun = () => {
-  let dragFromIndex;
-  let dragToIndex;
+dragFun = () => {
+  let fromIndex;
+  let toIndex;
   let items = listContainer.querySelectorAll('.item');
   items.forEach((item) => {
     item.draggable = true;
     item.addEventListener('dragstart', (e) => {
       setTimeout(() => item.classList.add('dragging'), 0);
-      dragFromIndex = Array.from(items).indexOf(e.target);
+      fromIndex = Array.from(items).indexOf(e.target);
     });
     item.addEventListener('dragend', (e) => {
       item.classList.remove('dragging');
-
-      const newParent = e.target.parentNode;
-      const newItems = newParent.childNodes;
-      dragToIndex = Array.from(newItems).indexOf(e.target);
       items = listContainer.querySelectorAll('.item');
-
-      const objToMove = toDoList[dragFromIndex];
-      objToMove.index = dragToIndex;
-      toDoList.splice(dragFromIndex, 1);
-      toDoList.splice(dragToIndex, 0, objToMove);
+      toIndex = Array.from(items).indexOf(e.target);
+      const dragedItem = toDoList[fromIndex];
+      dragedItem.index = toIndex;
+      toDoList.splice(fromIndex, 1);
+      toDoList.splice(toIndex, 0, dragedItem);
       UpdateIndex(0);
-      window.location.reload(); // I should find a better solution than reloading the page
+      ListenToBtns();
+      dragFun();
     });
   });
 
