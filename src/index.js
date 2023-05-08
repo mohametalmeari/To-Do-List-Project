@@ -13,13 +13,13 @@ let toDoList = [];
 const refreshIcon = document.getElementById('refresh-icon');
 const enterIcon = document.getElementById('enter-icon');
 const addField = document.getElementById('add-field');
-const cleanBtn = document.getElementById('clean-btn');
+const clearBtn = document.getElementById('clear-btn');
 const listContainer = document.getElementById('list-container');
 refreshIcon.src = Refresh;
 
 enterIcon.src = Enter;
 
-if (typeof localStorage.getItem('to_do_list') !== "undefined" && localStorage.getItem('to_do_list') !== null) {
+if (typeof localStorage.getItem('to_do_list') !== 'undefined' && localStorage.getItem('to_do_list') !== null) {
   toDoList = JSON.parse(localStorage.getItem('to_do_list'));
 }
 
@@ -32,40 +32,38 @@ const UpdateIndex = (x) => {
   UpdateStorage();
 };
 
-const EditFun = (varX) => {
-  const editArrItem = toDoList.filter((item) => item.index === varX);
-  return editArrItem[0].description;
-};
-
-const DelFun = (varX) => {
-  toDoList = toDoList.filter((item) => item.index !== varX);
-};
-
-const OkFun = (varX, val) => {
-  toDoList = toDoList.filter((item) => {
-    if (item.index === varX) {
-      item.description = val;
-    }
-    return true;
-  });
-};
-
-
 const ListenToBtns = () => {
-  const listItem = document.querySelectorAll('.item');
-const checkIcon = document.querySelectorAll('.check-icon');
-const span = document.querySelectorAll('.task-text');
-const editField = document.querySelectorAll('.edit-field');
-const delIcon = document.querySelectorAll('.del-icon');
-const editIcon = document.querySelectorAll('.edit-icon');
-const okIcon = document.querySelectorAll('.ok-icon');
-const xIcon = document.querySelectorAll('.x-icon');
-const dotsIcon = document.querySelectorAll('.dots-icon');
+  const checkIcon = document.querySelectorAll('.check-icon');
+  const span = document.querySelectorAll('.task-text');
+  const editField = document.querySelectorAll('.edit-field');
+  const delIcon = document.querySelectorAll('.del-icon');
+  const editIcon = document.querySelectorAll('.edit-icon');
+  const okIcon = document.querySelectorAll('.ok-icon');
+  const xIcon = document.querySelectorAll('.x-icon');
+  const dotsIcon = document.querySelectorAll('.dots-icon');
 
-for (let i = 0; i < toDoList.length; i += 1) {
-  const index = toDoList[i].index;
+  const checkFun = (i) => {
+    toDoList[i].completed = CheckIfCompleted(checkIcon[i].checked);
+  };
+  const EditFun = (i) => {
+    editField[i].value = toDoList[i].description;
+    editField[i].focus();
+  };
+  const DelFun = (i) => {
+    toDoList = toDoList.filter((item) => item.index !== i);
+  };
+  const OkFun = (i) => {
+    toDoList.forEach((item) => {
+      if (item.index === i) {
+        item.description = editField[i].value;
+      }
+    });
+    span[i].innerHTML = editField[i].value;
+  };
+
+  for (let i = 0; i < toDoList.length; i += 1) {
     checkIcon[i].addEventListener('change', () => {
-      toDoList[i].completed = CheckIfCompleted(checkIcon[i].checked);
+      checkFun(i);
       UpdateStorage();
     });
     dotsIcon[i].addEventListener('click', () => {
@@ -77,29 +75,24 @@ for (let i = 0; i < toDoList.length; i += 1) {
       HideElement([editField[i], delIcon[i], editIcon[i], okIcon[i], xIcon[i]]);
     });
     editIcon[i].addEventListener('click', () => {
-      editField[i].value = EditFun(index);
       ShowElement([editField[i], okIcon[i], xIcon[i]]);
       HideElement([checkIcon[i], span[i], delIcon[i], editIcon[i], dotsIcon[i]]);
+      EditFun(i);
     });
     delIcon[i].addEventListener('click', () => {
-      listItem[i].remove();
-      DelFun(index);
+      DelFun(i);
       UpdateStorage();
-      UpdateIndex(index);
+      UpdateIndex(0);
       ShowList();
     });
     okIcon[i].addEventListener('click', () => {
-      OkFun(index, editField[i].value);
+      OkFun(i);
       UpdateStorage();
-      span[i].innerHTML = editField[i].value;
       ShowElement([checkIcon[i], span[i], dotsIcon[i]]);
       HideElement([editField[i], delIcon[i], editIcon[i], okIcon[i], xIcon[i]]);
     });
-}
-}
-
-
-
+  }
+};
 
 const ShowList = () => {
   listContainer.innerHTML = '';
@@ -107,6 +100,7 @@ const ShowList = () => {
     const listItem = document.createElement('li');
     const checkIcon = document.createElement('input');
     const span = document.createElement('span');
+
     const editField = document.createElement('input');
     const delIcon = document.createElement('img');
     const editIcon = document.createElement('img');
@@ -144,6 +138,7 @@ const ShowList = () => {
     listItem.appendChild(dotsIcon);
 
     HideElement([editField, delIcon, editIcon, okIcon, xIcon]);
+
     listContainer.appendChild(listItem);
   }
   ListenToBtns();
@@ -152,19 +147,12 @@ const ShowList = () => {
 ShowList();
 
 enterIcon.addEventListener('click', () => {
-  if (toDoList.length !== 0) {
-    toDoList.push({
-      description: addField.value,
-      completed: false,
-      index: toDoList[toDoList.length - 1].index + 1,
-    });
-  } else {
-    toDoList.push({
-      description: addField.value,
-      completed: false,
-      index: 0,
-    });
-  }
+  const index = (toDoList.length !== 0) ? toDoList[toDoList.length - 1].index + 1 : 0;
+  toDoList.push({
+    description: addField.value,
+    completed: false,
+    index,
+  });
   ShowList();
   UpdateStorage();
   addField.value = '';
@@ -178,10 +166,9 @@ addField.addEventListener('keydown', (event) => {
   }
 });
 
-cleanBtn.addEventListener('click', () => {
+clearBtn.addEventListener('click', () => {
   toDoList = toDoList.filter((item) => item.completed === false);
   UpdateStorage();
-  UpdateIndex(0);
   ShowList();
 });
 
