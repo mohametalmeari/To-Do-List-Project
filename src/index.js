@@ -66,6 +66,7 @@ const ListenToBtns = () => {
     });
     span[i].innerHTML = editField[i].value;
   };
+  
 
   for (let i = 0; i < toDoList.length; i += 1) {
     checkIcon[i].addEventListener('change', () => {
@@ -95,6 +96,16 @@ const ListenToBtns = () => {
       UpdateStorage();
       ShowElement([checkIcon[i], span[i], dotsIcon[i]]);
       HideElement([editField[i], delIcon[i], editIcon[i], okIcon[i], xIcon[i]]);
+    });
+
+    editField[i].addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        okIcon[i].click();
+      }else if (event.key === 'Escape') {
+        // Hide the edit field
+        xIcon[i].click();
+      }
     });
   }
 };
@@ -162,6 +173,7 @@ enterIcon.addEventListener('click', () => {
   UpdateStorage();
   addField.value = '';
   addField.focus();
+  dragFun();
 });
 
 addField.addEventListener('keydown', (event) => {
@@ -175,32 +187,30 @@ clearBtn.addEventListener('click', () => {
   toDoList = toDoList.filter((item) => item.completed === false);
   UpdateStorage();
   ShowList();
+  dragFun();
 });
 
 const dragFun = () => {
-  let dragFromIndex;
-  let dragToIndex;
+  let fromIndex;
+  let toIndex;
   let items = listContainer.querySelectorAll('.item');
   items.forEach((item) => {
     item.draggable = true;
     item.addEventListener('dragstart', (e) => {
       setTimeout(() => item.classList.add('dragging'), 0);
-      dragFromIndex = Array.from(items).indexOf(e.target);
+      fromIndex = Array.from(items).indexOf(e.target);
     });
     item.addEventListener('dragend', (e) => {
       item.classList.remove('dragging');
-
-      const newParent = e.target.parentNode;
-      const newItems = newParent.childNodes;
-      dragToIndex = Array.from(newItems).indexOf(e.target);
       items = listContainer.querySelectorAll('.item');
-
-      const objToMove = toDoList[dragFromIndex];
-      objToMove.index = dragToIndex;
-      toDoList.splice(dragFromIndex, 1);
-      toDoList.splice(dragToIndex, 0, objToMove);
+      toIndex = Array.from(items).indexOf(e.target);
+      const dragedItem = toDoList[fromIndex];
+      dragedItem.index = toIndex;
+      toDoList.splice(fromIndex, 1);
+      toDoList.splice(toIndex, 0, dragedItem);
       UpdateIndex(0);
-      window.location.reload(); // I should find a better solution than reloading the page
+      ListenToBtns();
+      dragFun();
     });
   });
 
