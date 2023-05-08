@@ -107,7 +107,7 @@ const ListenToBtns = () => {
       } else if (event.key === 'Escape') {
         xIcon[i].click();
       }
-    });s
+    });
   }
 };
 
