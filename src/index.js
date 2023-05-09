@@ -62,7 +62,7 @@ const ListenToBtns = () => {
     listItem[i].remove();
     UpdateIndex(0);
     ListenToBtns();
-    dragFun();
+    
   };
   const OkFun = (i) => {
     toDoList.forEach((item) => {
@@ -93,6 +93,7 @@ const ListenToBtns = () => {
     });
     delIcon[i].addEventListener('click', () => {
       DelFun(i);
+      dragFun();
     });
     okIcon[i].addEventListener('click', () => {
       OkFun(i);
