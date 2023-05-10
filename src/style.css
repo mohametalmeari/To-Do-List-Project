@@ -89,6 +89,11 @@ input:checked ~ span {
   flex-grow: 1;
 }
 
+.drag-icon:hover {
+  cursor: move;
+}
+
+
 #clear-btn {
   height: 3rem;
   padding: 1rem;

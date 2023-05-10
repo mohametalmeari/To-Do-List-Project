@@ -6,8 +6,10 @@ import Edit from './images/edit.png';
 import Ok from './images/ok.png';
 import Exit from './images/exit.png';
 import Dots from './images/dots.png';
+import Drag from './images/drag.png';
 import { ShowElement, HideElement } from './modules/visibility.js';
-import CheckIfCompleted from './modules/complete.js';
+
+import {DelFun, EditFun, checkFun, OkFun} from './modules/manipulate.js';
 
 let toDoList = [];
 const refreshIcon = document.getElementById('refresh-icon');
@@ -21,9 +23,14 @@ refreshIcon.src = Refresh;
 
 enterIcon.src = Enter;
 
+const UpdateToDoList = () => {
 if (typeof localStorage.getItem('to_do_list') !== 'undefined' && localStorage.getItem('to_do_list') !== null) {
   toDoList = JSON.parse(localStorage.getItem('to_do_list'));
+}else {
+  toDoList = [];
 }
+}
+UpdateToDoList();
 
 const UpdateStorage = () => localStorage.setItem('to_do_list', JSON.stringify(toDoList));
 
@@ -38,8 +45,6 @@ const ListenToBtns = () => {
   const renewList = listContainer.cloneNode(true);
   listContainer.replaceWith(renewList);
   listContainer = document.getElementById('list-container');
-
-  const listItem = document.querySelectorAll('.item');
   const checkIcon = document.querySelectorAll('.check-icon');
   const span = document.querySelectorAll('.task-text');
   const editField = document.querySelectorAll('.edit-field');
@@ -49,34 +54,10 @@ const ListenToBtns = () => {
   const xIcon = document.querySelectorAll('.x-icon');
   const dotsIcon = document.querySelectorAll('.dots-icon');
 
-  const checkFun = (i) => {
-    toDoList[i].completed = CheckIfCompleted(checkIcon[i].checked);
-    UpdateStorage();
-  };
-  const EditFun = (i) => {
-    editField[i].value = toDoList[i].description;
-    editField[i].focus();
-  };
-  const DelFun = (i) => {
-    toDoList = toDoList.filter((item) => item.index !== i);
-    listItem[i].remove();
-    UpdateIndex(0);
-    ListenToBtns();
-    
-  };
-  const OkFun = (i) => {
-    toDoList.forEach((item) => {
-      if (item.index === i) {
-        item.description = editField[i].value;
-      }
-    });
-    span[i].innerHTML = editField[i].value;
-    UpdateStorage();
-  };
-
   for (let i = 0; i < toDoList.length; i += 1) {
     checkIcon[i].addEventListener('change', () => {
       checkFun(i);
+      UpdateToDoList();
     });
     dotsIcon[i].addEventListener('click', () => {
       ShowElement([checkIcon[i], span[i], delIcon[i], editIcon[i], xIcon[i]]);
@@ -90,13 +71,18 @@ const ListenToBtns = () => {
       ShowElement([editField[i], okIcon[i], xIcon[i]]);
       HideElement([checkIcon[i], span[i], delIcon[i], editIcon[i], dotsIcon[i]]);
       EditFun(i);
+      UpdateToDoList();
     });
     delIcon[i].addEventListener('click', () => {
       DelFun(i);
+      UpdateToDoList();
+      UpdateIndex(0);
+      ListenToBtns();
       dragFun();
     });
     okIcon[i].addEventListener('click', () => {
       OkFun(i);
+      UpdateToDoList();
       ShowElement([checkIcon[i], span[i], dotsIcon[i]]);
       HideElement([editField[i], delIcon[i], editIcon[i], okIcon[i], xIcon[i]]);
     });
@@ -125,6 +111,7 @@ const ShowList = () => {
     const okIcon = document.createElement('img');
     const xIcon = document.createElement('img');
     const dotsIcon = document.createElement('img');
+    const dragIcon = document.createElement('img');
 
     listItem.classList.add('item');
     checkIcon.classList.add('check-icon');
@@ -135,6 +122,7 @@ const ShowList = () => {
     okIcon.classList.add('ok-icon');
     xIcon.classList.add('x-icon');
     dotsIcon.classList.add('dots-icon');
+    dragIcon.classList.add('drag-icon');
     checkIcon.type = 'checkbox';
     checkIcon.checked = toDoList[i].completed;
     span.innerHTML = toDoList[i].description;
@@ -145,7 +133,9 @@ const ShowList = () => {
     okIcon.src = Ok;
     xIcon.src = Exit;
     dotsIcon.src = Dots;
+    dragIcon.src = Drag;
 
+    listItem.appendChild(dragIcon);
     listItem.appendChild(checkIcon);
     listItem.appendChild(span);
     listItem.appendChild(editField);
@@ -154,6 +144,7 @@ const ShowList = () => {
     listItem.appendChild(okIcon);
     listItem.appendChild(xIcon);
     listItem.appendChild(dotsIcon);
+
 
     HideElement([editField, delIcon, editIcon, okIcon, xIcon]);
 
@@ -187,6 +178,7 @@ addField.addEventListener('keydown', (event) => {
 
 clearBtn.addEventListener('click', () => {
   toDoList = toDoList.filter((item) => item.completed === false);
+  UpdateIndex(0);
   UpdateStorage();
   ShowList();
   dragFun();
@@ -200,12 +192,13 @@ dragFun = () => {
     item.draggable = true;
     item.addEventListener('dragstart', (e) => {
       setTimeout(() => item.classList.add('dragging'), 0);
-      fromIndex = Array.from(items).indexOf(e.target);
+      fromIndex = Array.from(items).indexOf(e.target.closest('.item'));
+      console.log(fromIndex);
     });
     item.addEventListener('dragend', (e) => {
       item.classList.remove('dragging');
       items = listContainer.querySelectorAll('.item');
-      toIndex = Array.from(items).indexOf(e.target);
+      toIndex = Array.from(items).indexOf(e.target.closest('.item'));
       const dragedItem = toDoList[fromIndex];
       dragedItem.index = toIndex;
       toDoList.splice(fromIndex, 1);
