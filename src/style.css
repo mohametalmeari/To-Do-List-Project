@@ -93,7 +93,6 @@ input:checked ~ span {
   cursor: move;
 }
 
-
 #clear-btn {
   height: 3rem;
   padding: 1rem;
