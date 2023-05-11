@@ -80,7 +80,7 @@ const ListenToBtns = () => {
       UpdateToDoList();
       UpdateIndex(0);
       ListenToBtns();
-      dragFun();
+      // dragFun();
     });
     okIcon[i].addEventListener('click', () => {
       OkFun(i);

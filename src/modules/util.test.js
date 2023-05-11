@@ -1,4 +1,4 @@
-import { DelFun, AddFun, toDoList } from './util.js';
+import { DelFun, AddFun, copyList } from './util.js';
 
 jest.mock('./UpdateToDoList.js');
 const fillPage = () => {
@@ -34,7 +34,7 @@ describe('Delete Functionality', () => {
   test('List Array Length Test', () => {
     fillPage();
     DelFun(1);
-    expect(toDoList.length).toBe(2);
+    expect(copyList().length).toBe(2);
   });
   test('HTML List Item Position Test', () => {
     fillPage();
@@ -47,11 +47,11 @@ describe('Delete Functionality', () => {
 describe('Add Functionality', () => {
   test('List Item Index', () => {
     AddFun();
-    expect(toDoList[toDoList.length - 1].index).toBe(3);
+    expect(copyList()[copyList().length - 1].index).toBe(3);
   });
 
   test('List Length', () => {
     AddFun();
-    expect(toDoList.length).toBe(4);
+    expect(copyList().length).toBe(4);
   });
 });

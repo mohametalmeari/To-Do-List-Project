@@ -2,6 +2,7 @@ import CheckIfCompleted from './complete.js';
 import UpdateToDoList from './UpdateToDoList.js';
 
 let toDoList = [];
+const copyList = () => toDoList;
 const UpdateStorage = () => localStorage.setItem('to_do_list', JSON.stringify(toDoList));
 
 const DelFun = (i) => {
@@ -53,5 +54,5 @@ const AddFun = () => {
 };
 
 export {
-  DelFun, EditFun, checkFun, OkFun, AddFun, toDoList,
+  DelFun, EditFun, checkFun, OkFun, AddFun, copyList,
 };
