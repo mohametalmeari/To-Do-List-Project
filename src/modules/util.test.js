@@ -1,7 +1,8 @@
-jest.mock('./UpdateToDoList.js')
-import { DelFun, AddFun, toDoList, } from "./util.js";
+import { DelFun, AddFun, toDoList } from './util.js';
+
+jest.mock('./UpdateToDoList.js');
 const fillPage = () => {
-document.body.innerHTML =`
+  document.body.innerHTML = `
 <div class="main-container">
     <div>
         <h1>Today's To Do</h1>
@@ -20,37 +21,37 @@ document.body.innerHTML =`
     <button id="clear-btn" href="">Clear All Completed</button>
 </div>
 
-`};
-
+`;
+};
 
 describe('Delete Functionality', () => {
-    test('HTML List Length Test', () => {
-      fillPage();
-      DelFun(0);
-      const listItem = document.querySelectorAll('.item');
-      expect(listItem.length).toBe(2);
-    });
-    test('List Array Length Test', () => {
-      fillPage();
-      DelFun(1);
-      expect(toDoList.length).toBe(2);
-    });
-    test('HTML List Item Position Test', () => {
-      fillPage();
-      DelFun(0);
-      const listItem = document.querySelectorAll('.item span');
-      expect(listItem[0].innerHTML).toBe('Task 2');
-    });
-})
+  test('HTML List Length Test', () => {
+    fillPage();
+    DelFun(0);
+    const listItem = document.querySelectorAll('.item');
+    expect(listItem.length).toBe(2);
+  });
+  test('List Array Length Test', () => {
+    fillPage();
+    DelFun(1);
+    expect(toDoList.length).toBe(2);
+  });
+  test('HTML List Item Position Test', () => {
+    fillPage();
+    DelFun(0);
+    const listItem = document.querySelectorAll('.item span');
+    expect(listItem[0].innerHTML).toBe('Task 2');
+  });
+});
 
-// describe('Add Functionality', () => {
-//   test('List Item Index', () => {
-//     AddFun();
-//     expect(toDoList[toDoList.length - 1 ].index).toBe(3);
-//   });
+describe('Add Functionality', () => {
+  test('List Item Index', () => {
+    AddFun();
+    expect(toDoList[toDoList.length - 1].index).toBe(3);
+  });
 
-//   test('List Length', () => {
-//     AddFun();
-//     expect(toDoList.length).toBe(4);
-//   });
-// })
+  test('List Length', () => {
+    AddFun();
+    expect(toDoList.length).toBe(4);
+  });
+});

@@ -19,7 +19,7 @@ const enterIcon = document.getElementById('enter-icon');
 const addField = document.getElementById('add-field');
 const clearBtn = document.getElementById('clear-btn');
 let listContainer = document.getElementById('list-container');
-let dragFun = () => {};
+let dragFun = () => { };
 
 refreshIcon.src = Refresh;
 

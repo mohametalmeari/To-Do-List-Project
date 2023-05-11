@@ -50,11 +50,8 @@ const AddFun = () => {
     index,
   });
   UpdateStorage();
-}
-
-const a =1;
-const b = 1;
+};
 
 export {
-  DelFun, EditFun, checkFun, OkFun, AddFun, toDoList
+  DelFun, EditFun, checkFun, OkFun, AddFun, toDoList,
 };
