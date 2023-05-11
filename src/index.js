@@ -9,7 +9,9 @@ import Dots from './images/dots.png';
 import Drag from './images/drag.png';
 import { ShowElement, HideElement } from './modules/visibility.js';
 
-import {DelFun, EditFun, checkFun, OkFun} from './modules/manipulate.js';
+import {
+  DelFun, EditFun, checkFun, OkFun, AddFun,
+} from './modules/util.js';
 
 let toDoList = [];
 const refreshIcon = document.getElementById('refresh-icon');
@@ -24,12 +26,12 @@ refreshIcon.src = Refresh;
 enterIcon.src = Enter;
 
 const UpdateToDoList = () => {
-if (typeof localStorage.getItem('to_do_list') !== 'undefined' && localStorage.getItem('to_do_list') !== null) {
-  toDoList = JSON.parse(localStorage.getItem('to_do_list'));
-}else {
-  toDoList = [];
-}
-}
+  if (typeof localStorage.getItem('to_do_list') !== 'undefined' && localStorage.getItem('to_do_list') !== null) {
+    toDoList = JSON.parse(localStorage.getItem('to_do_list'));
+  } else {
+    toDoList = [];
+  }
+};
 UpdateToDoList();
 
 const UpdateStorage = () => localStorage.setItem('to_do_list', JSON.stringify(toDoList));
@@ -145,7 +147,6 @@ const ShowList = () => {
     listItem.appendChild(xIcon);
     listItem.appendChild(dotsIcon);
 
-
     HideElement([editField, delIcon, editIcon, okIcon, xIcon]);
 
     listContainer.appendChild(listItem);
@@ -156,14 +157,9 @@ const ShowList = () => {
 ShowList();
 
 enterIcon.addEventListener('click', () => {
-  const index = (toDoList.length !== 0) ? toDoList[toDoList.length - 1].index + 1 : 0;
-  toDoList.push({
-    description: addField.value,
-    completed: false,
-    index,
-  });
+  AddFun();
+  UpdateToDoList();
   ShowList();
-  UpdateStorage();
   addField.value = '';
   addField.focus();
   dragFun();
@@ -193,7 +189,6 @@ dragFun = () => {
     item.addEventListener('dragstart', (e) => {
       setTimeout(() => item.classList.add('dragging'), 0);
       fromIndex = Array.from(items).indexOf(e.target.closest('.item'));
-      console.log(fromIndex);
     });
     item.addEventListener('dragend', (e) => {
       item.classList.remove('dragging');
