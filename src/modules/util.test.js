@@ -1,7 +1,10 @@
-import { DelFun, AddFun, copyList } from './util.js';
+import {
+  DelFun, AddFun, copyList, EditFun, OkFun, ClearFun, checkFun, resetSrorage,
+} from './util.js';
 
-jest.mock('./UpdateToDoList.js');
+jest.mock('./storage.js');
 const fillPage = () => {
+  resetSrorage();
   document.body.innerHTML = `
 <div class="main-container">
     <div>
@@ -53,5 +56,57 @@ describe('Add Functionality', () => {
   test('List Length', () => {
     AddFun();
     expect(copyList().length).toBe(4);
+  });
+});
+
+describe('Edit Functionality', () => {
+  test('EditField Content Test', () => {
+    fillPage();
+    const editField = document.querySelectorAll('.edit-field');
+    EditFun(0);
+
+    expect(editField[0].value).toBe('Task 1');
+  });
+
+  test('Edit Array Test', () => {
+    fillPage();
+    const editField = document.querySelectorAll('.edit-field');
+    EditFun(0);
+    editField[0].value = 'New Task';
+    OkFun(0);
+    expect(copyList()[0].description).toBe('New Task');
+  });
+
+  test('Edit List Item Test', () => {
+    fillPage();
+    const editField = document.querySelectorAll('.edit-field');
+    const span = document.querySelectorAll('.task-text');
+    EditFun(0);
+    editField[0].value = 'New Task';
+    OkFun(0);
+    expect(span[0].innerHTML).toBe('New Task');
+  });
+});
+
+describe('Completed Status Functionality', () => {
+  test('Completed Test', () => {
+    fillPage();
+    const checkIcon = document.querySelectorAll('.check-icon');
+    checkIcon[0].checked = true;
+    checkFun(0);
+    expect(copyList()[0].completed).toBe(true);
+  });
+});
+
+describe('Clear Completed Functionality', () => {
+  test('Clear Test', () => {
+    fillPage();
+    const checkIcon = document.querySelectorAll('.check-icon');
+    checkIcon[0].checked = true;
+    checkFun(0);
+    checkIcon[1].checked = true;
+    checkFun(1);
+    ClearFun();
+    expect(copyList().length).toBe(1);
   });
 });
