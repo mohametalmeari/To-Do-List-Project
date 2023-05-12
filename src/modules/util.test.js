@@ -98,15 +98,15 @@ describe('Completed Status Functionality', () => {
   });
 });
 
-// describe('Clear Completed Functionality', () => {
-//   test('Clear Test', () => {
-//     fillPage();
-//     const checkIcon = document.querySelectorAll('.check-icon');
-//     checkIcon[0].checked = true;
-//     checkFun(0);
-//     checkIcon[1].checked = true;
-//     checkFun(1);
-//     ClearFun();
-//     expect(copyList().length).toBe(1);
-//   });
-// });
+describe('Clear Completed Functionality', () => {
+  test('Clear Test', () => {
+    fillPage();
+    const checkIcon = document.querySelectorAll('.check-icon');
+    checkIcon[0].checked = true;
+    checkFun(0);
+    checkIcon[1].checked = true;
+    checkFun(1);
+    ClearFun();
+    expect(copyList().length).toBe(1);
+  });
+});
