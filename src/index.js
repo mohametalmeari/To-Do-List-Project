@@ -10,7 +10,7 @@ import Drag from './images/drag.png';
 import { ShowElement, HideElement } from './modules/visibility.js';
 
 import {
-  DelFun, EditFun, checkFun, OkFun, AddFun,
+  DelFun, EditFun, checkFun, OkFun, AddFun, ClearFun,
 } from './modules/util.js';
 
 let toDoList = [];
@@ -173,7 +173,8 @@ addField.addEventListener('keydown', (event) => {
 });
 
 clearBtn.addEventListener('click', () => {
-  toDoList = toDoList.filter((item) => item.completed === false);
+  ClearFun();
+  UpdateToDoList();
   UpdateIndex(0);
   UpdateStorage();
   ShowList();

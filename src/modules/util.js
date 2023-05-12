@@ -1,16 +1,14 @@
-import CheckIfCompleted from './complete.js';
-import UpdateToDoList from './UpdateToDoList.js';
+import { UpdateToDoList, UpdateStorage, resetSrorage } from './storage.js';
 
 let toDoList = [];
 const copyList = () => toDoList;
-const UpdateStorage = () => localStorage.setItem('to_do_list', JSON.stringify(toDoList));
 
 const DelFun = (i) => {
   toDoList = UpdateToDoList();
   toDoList = toDoList.filter((item) => item.index !== i);
   const listItem = document.querySelectorAll('.item');
   listItem[i].remove();
-  UpdateStorage();
+  UpdateStorage(toDoList);
 };
 
 const EditFun = (i) => {
@@ -18,14 +16,14 @@ const EditFun = (i) => {
   const editField = document.querySelectorAll('.edit-field');
   editField[i].value = toDoList[i].description;
   editField[i].focus();
-  UpdateStorage();
+  UpdateStorage(toDoList);
 };
 
 const checkFun = (i) => {
   toDoList = UpdateToDoList();
   const checkIcon = document.querySelectorAll('.check-icon');
-  toDoList[i].completed = CheckIfCompleted(checkIcon[i].checked);
-  UpdateStorage();
+  toDoList[i].completed = checkIcon[i].checked;
+  UpdateStorage(toDoList);
 };
 
 const OkFun = (i) => {
@@ -38,7 +36,7 @@ const OkFun = (i) => {
     }
   });
   span[i].innerHTML = editField[i].value;
-  UpdateStorage();
+  UpdateStorage(toDoList);
 };
 
 const AddFun = () => {
@@ -50,9 +48,15 @@ const AddFun = () => {
     completed: false,
     index,
   });
-  UpdateStorage();
+  UpdateStorage(toDoList);
+};
+
+const ClearFun = () => {
+  toDoList = UpdateToDoList();
+  toDoList = toDoList.filter((item) => item.completed === false);
+  UpdateStorage(toDoList);
 };
 
 export {
-  DelFun, EditFun, checkFun, OkFun, AddFun, copyList,
+  DelFun, EditFun, checkFun, OkFun, AddFun, ClearFun, copyList, resetSrorage,
 };
