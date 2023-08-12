@@ -1,6 +1,4 @@
-## Copyright 2023, Mohamad Mari
-
-###### APP TYPE can be a webpage/website, a web app, a software and so on
+## Copyright 2023, Mohamad ALMEARI
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this website and associated documentation files, to deal in the website without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the website, and to permit persons to whom the website is furnished to do so, subject to the following conditions:
 
